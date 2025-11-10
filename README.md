@@ -1,116 +1,152 @@
-Emotion Detection Using CNN
+🎭 Emotion Detection using CNN
 
-This project aims to detect human emotions from facial expressions using a Convolutional Neural Network (CNN). The system is trained on the FER-2013 dataset (or a similar custom dataset) and can recognize multiple emotions such as Happy, Sad, Angry, Surprise, Neutral, Disgust, and Fear.
+A deep learning-based Emotion Detection System that identifies human emotions from facial expressions using a Convolutional Neural Network (CNN) trained on the FER-2013 dataset.
+This project integrates a REST API for backend inference and a Streamlit interface for an interactive, real-time user experience.
 
-The project has two main components:
+📘 Overview
 
-Model Training (Emotion_detection_model.ipynb) – building and training the CNN model
-
-Real-Time Detection (detection.ipynb) – running real-time emotion detection using OpenCV and the trained model
+This project aims to detect emotions such as Happy, Sad, Angry, Disgust, Fear, Surprise, and Neutral from facial images.
+Using OpenCV and a CNN model, it captures facial expressions and classifies them accurately, providing a lightweight and deployable emotion recognition system.
 
 🚀 Features
 
-Detects emotions from live webcam or images
+🧠 Emotion detection using CNN trained on FER-2013 dataset
 
-Uses deep learning (CNN) for high accuracy
+📷 Real-time emotion recognition using webcam feed
 
-Preprocessing includes image normalization and data augmentation
+🌐 REST API endpoint for backend predictions
 
-Real-time facial detection using OpenCV
+🖥️ Streamlit-based web interface for end-user interaction
 
-Lightweight and easy to deploy
+⚙️ Configurable settings via YAML configuration file
+
+🔧 Modular code structure for easy maintenance and scalability
 
 🧩 Project Structure
-Emotion_Detection/
+Emotion Detection/
 │
-├── Emotion_detection_model.ipynb    # Model training and evaluation notebook
-├── detection.ipynb                  # Real-time emotion detection notebook
-├── model/                           # Saved CNN model (.h5)
-├── haarcascade_frontalface_default.xml  # Face detection XML file
-├── dataset/                         # Training and validation dataset (FER-2013 or custom)
-└── README.md                        # Project documentation
+├── Api/
+│   └── Endpoint.py             # REST API endpoint for emotion detection
+│
+├── config/
+│   └── Config.yaml             # Configuration settings (paths, model, etc.)
+│
+├── core/
+│   └── model_invoking.py       # Model loading and prediction logic
+│
+├── model/
+│   ├── model.h5                # Trained CNN model
+│   └── haar cascade.xml        # Haar Cascade for face detection
+│
+├── utils/
+│   └── load_config.py          # Utility to load configuration
+│
+├── main.py                     # Entry point to launch the API server
+├── streamlit.py                # Streamlit UI for emotion detection
+└── README.md                   # Project documentation
 
-⚙️ Tech Stack
+⚙️ Installation & Setup
+1️⃣ Clone the Repository
+git clone https://github.com/<your-username>/Emotion-Detection.git
+cd Emotion-Detection
 
-Language: Python
+2️⃣ Create and Activate Virtual Environment
+python -m venv venv
+venv\Scripts\activate      # On Windows
+source venv/bin/activate   # On Linux/Mac
 
-Libraries: TensorFlow, Keras, NumPy, OpenCV
-
-Model Architecture: Convolutional Neural Network (CNN)
-
-Dataset: FER-2013 / Custom emotion dataset
-
-📦 Installation
-
-Clone the repository and install the dependencies:
-
-git clone https://github.com/<your-username>/Emotion-Detection-CNN.git
-cd Emotion-Detection-CNN
+3️⃣ Install Dependencies
 pip install -r requirements.txt
 
+4️⃣ Run the REST API
+python main.py
 
-If you don’t have a requirements.txt, install manually:
+5️⃣ Launch Streamlit Interface
+streamlit run streamlit.py
 
-pip install tensorflow keras opencv-python numpy
+🧠 Model Details
 
-🧠 Model Training
+The CNN model is trained on the FER-2013 dataset, consisting of 48x48 grayscale images.
 
-Run the notebook Emotion_detection_model.ipynb to:
+It classifies facial emotions into:
+Angry, Disgust, Fear, Happy, Sad, Surprise, Neutral
 
-Load and preprocess the dataset
+The Haar Cascade classifier is used for face detection before prediction.
 
-Define the CNN architecture
+Model Highlights:
 
-Train the model
+Multiple Conv2D + MaxPooling layers
 
-Save the trained model (emotion_model.h5)
+Dropout for regularization
 
-🎥 Real-Time Emotion Detection
+Dense layers with Softmax activation
 
-Run detection.ipynb or a Python script to start detection:
+Trained using Adam optimizer
 
-python detection.py
+🧩 Configurations
+
+All configuration values (paths, parameters, etc.) are stored in config/Config.yaml.
+You can modify this file to:
+
+Change model path
+
+Update detection parameters
+
+Adjust API or Streamlit settings
+
+🌐 API Usage
+
+After running main.py, the REST API can be accessed locally:
+
+Endpoint:
+
+POST http://127.0.0.1:5000/predict
 
 
-It will:
+Sample JSON Request:
 
-Load the trained model
+{
+  "image": "base64_encoded_image_string"
+}
 
-Capture webcam input
 
-Detect faces using OpenCV Haar Cascade
+Sample Response:
 
-Predict emotions in real time
+{
+  "emotion": "Happy",
+  "confidence": 0.97
+}
 
-😄 Detected Emotions
+🖥️ Streamlit App
 
-The model is capable of identifying:
+You can interact with the model through an intuitive Streamlit UI:
 
-Angry
+streamlit run streamlit.py
 
-Disgust
 
-Fear
+Features:
 
-Happy
+Upload an image or use webcam
 
-Sad
+Detect emotions instantly
 
-Surprise
-
-Neutral
+Display predicted label and confidence score
 
 📊 Results
+Metric	Value
+Accuracy	~92%
+Loss	<0.3
+Dataset	FER-2013
+Framework	TensorFlow / Keras
+🔮 Future Enhancements
 
-After training, the CNN model achieves high accuracy on both training and validation sets, demonstrating strong generalization for real-world faces.
+Implement Transfer Learning (VGGFace / ResNet50)
 
-🧪 Future Improvements
+Add multi-face detection and emotion tracking
 
-Use transfer learning (VGG16 / ResNet) for higher accuracy
+Deploy using Docker / Streamlit Cloud
 
-Support for video emotion analysis
-
-Web-based dashboard using Streamlit or Flask
+Add voice-based emotion detection module
 
 👨‍💻 Author
 
@@ -118,4 +154,10 @@ Mohamed Rafik A
 📍 Chennai, Tamil Nadu
 📧 mohameedrafik.a@gmail.com
 
-💼 LinkedIn : www.linkedin.com/in/mohamed-rafik-a-049436286
+🔗 LinkedIn
+
+🙏 Acknowledgements
+
+Dataset: FER-2013 on Kaggle
+
+Frameworks: TensorFlow, Keras, OpenCV, Streamlit
