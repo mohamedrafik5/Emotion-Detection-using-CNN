@@ -1,0 +1,2 @@
+model_path: "model/emotion_model.h5"
+face_cascade_path: "model/haarcascade_frontalface_default.xml"
